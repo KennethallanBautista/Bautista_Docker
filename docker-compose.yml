@@ -1,0 +1,30 @@
+# SecureNotes Docker lab: local demonstration only.
+# The PostgreSQL account and secret below are example development credentials.
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://securenotes:securenotes_dev_password@db:5432/securenotes
+      SECRET_KEY: change-this-demo-secret-before-real-deployment
+
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: securenotes
+      POSTGRES_PASSWORD: securenotes_dev_password
+      POSTGRES_DB: securenotes
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U securenotes -d securenotes"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  postgres_data:

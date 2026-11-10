@@ -1,0 +1,27 @@
+# Python virtual environments and caches
+venv/
+.venv/
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Git, editor, local configuration, and generated files
+.git/
+.gitignore
+.vscode/
+.idea/
+.env
+.env.*
+*.log
+.DS_Store
+Thumbs.db
+
+# Development-only files and submission evidence
+screenshots/
+tests/
